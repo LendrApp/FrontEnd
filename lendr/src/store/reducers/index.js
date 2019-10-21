@@ -4,7 +4,10 @@ import {
   REGISTRATION_FAILURE,
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAILURE
+  LOGIN_FAILURE,
+  ADDING_ITEM,
+  ADD_ITEM_SUCCESS,
+  ADD_ITEM_FAILURE
 } from "../actions/index";
 
 //REGISTRATION
@@ -18,6 +21,8 @@ const initialState = {
   successLOGIN: false,
   username: "",
   password: "",
+  itemData: [],
+  addItem: false,
   data: []
 };
 
@@ -74,6 +79,36 @@ export const loginReducer = (state = initialState, action) => {
         username: "",
         password: ""
       };
+    default:
+      return state;
+  }
+};
+
+// ITEMS
+
+export const itemReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case ADDING_ITEM:
+      return {
+        ...state,
+        fetchingData: false,
+        addItem: true
+      };
+    case ADD_ITEM_SUCCESS:
+      return {
+        ...state,
+        itemData: action.payload,
+        fetchingData: false,
+        addItem: true,
+        error: ""
+      };
+    case ADD_ITEM_FAILURE:
+      return {
+        ...state,
+        addItem: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }
