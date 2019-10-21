@@ -48,3 +48,26 @@ export const login = (username, password) => dispatch => {
       });
     });
 };
+
+// Items Action
+export const ADDING_ITEM = "ADDING_ITEM";
+export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS";
+export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
+
+export const addLendItems = lendItems => dispatch => {
+  dispatch({ type: ADDING_ITEM });
+  return axiosWithAuth()
+    .post(``, lendItems)
+    .then(res => {
+      dispatch({
+        type: ADD_ITEM_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(res =>
+      dispatch({
+        type: ADD_ITEM_FAILURE,
+        payload: res.data
+      })
+    );
+};
