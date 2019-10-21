@@ -1,5 +1,9 @@
 import React from 'react';
-import {Welcome, Register, Login} from './components';
+import Welcome from './components/Welcome';
+import Register from './components/Register';
+import Login from './components/Login';
+
+import {Route} from 'react-router-dom';
 import './App.css';
 
 function App() {
