@@ -1,14 +1,19 @@
 import React from "react";
 import { Form, Input, Button } from "antd";
 import { connect } from "react-redux";
+
+import { addUser } from "../../store/actions";
+
 import "./Register.scss";
 
 const Register = props => {
+  console.log(props);
+
   const handleSubmit = e => {
     e.preventDefault();
     props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        props.signUpUser(values);
+        props.addUser(values);
         props.form.setFieldsValue({ username: "", password: "" });
         props.history.push(`/secret/${values.username}`);
       }
@@ -81,5 +86,5 @@ const WrappedRegistrationForm = Form.create({ name: "register" })(Register);
 
 export default connect(
   null,
-  {}
+  { addUser: addUser }
 )(WrappedRegistrationForm);
