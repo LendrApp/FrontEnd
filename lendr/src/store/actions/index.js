@@ -1,5 +1,4 @@
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import axios from "axios";
 
 //Registration Action
 
@@ -9,7 +8,7 @@ export const REGISTRATION_FAILURE = "REGISTRATION_FAILURE";
 
 export const addUser = user => dispatch => {
   dispatch({ type: REGISTRATION_START });
-  axios
+  axiosWithAuth()
     .post(``, {
       username: user.username,
       password: user.password
