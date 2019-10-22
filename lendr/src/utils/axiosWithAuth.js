@@ -7,7 +7,7 @@ const axiosWithAuth = () => {
     headers: {
       Authorization: token
     },
-    baseURL: ""
+    baseURL: "https://lenders-app.herokuapp.com"
   });
 };
 export default axiosWithAuth;
