@@ -3,8 +3,7 @@ import { Button, Label } from 'reactstrap';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-
-// username and password only
+import '../App.css'
 
 const UserLogin = ({ errors, touched, values, status }) => {
   const [user, setUser] = useState([]);
@@ -13,18 +12,18 @@ const UserLogin = ({ errors, touched, values, status }) => {
   }, [status]);
 
   return (
-    <Form>
-      <Label for='username'>Username</Label>
-      <Field type='text' name='username' placeholder='Enter your Username' autoComplete='username'></Field>
+    <Form className='login-form'>
+      <Label for='username' className='login-text'>Username</Label>
+      <Field type='text' name='username' placeholder='Enter your Username' autoComplete='username' className='login-field'></Field>
         {touched.username && errors.username && (
           <p className="error">{errors.username}</p>
         )}
-      <Label for='password'>Password</Label>
-      <Field type='password' name='password' placeholder='Enter your Password' autoComplete='current-password'></Field>
+      <Label for='password' className='login-text'>Password</Label>
+      <Field type='password' name='password' placeholder='Enter your Password' autoComplete='current-password' className='login-field'></Field>
         {touched.password && errors.password && (
           <p className="error">{errors.password}</p>
         )}
-      <Button type='submit'>Submit</Button>
+      <Button type='submit' className='submit'>Submit</Button>
     </Form>
   )
 }
