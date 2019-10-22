@@ -36,7 +36,6 @@ export const login = user => dispatch => {
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
     .post(`api/auth/login`, user)
-
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
