@@ -23,7 +23,6 @@ const LendItemsContainer = props => {
         {/* {props.itemData.map((user, index) => {
         return <LendItemsCard key={index} user={user} />;
       })} */}
-        <LendItemsCard />
       </div>
     </>
   );

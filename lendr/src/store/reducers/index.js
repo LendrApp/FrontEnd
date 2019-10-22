@@ -29,7 +29,7 @@ const initialState = {
 
 // REGISTRATION
 
-export const registrationReducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTRATION_START:
       return {
@@ -51,15 +51,6 @@ export const registrationReducer = (state = initialState, action) => {
         error: action.payload,
         fetchingData: false
       };
-    default:
-      return state;
-  }
-};
-
-//LOGIN
-
-export const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
     case LOGIN_START:
       return {
         ...state,
@@ -75,7 +66,8 @@ export const loginReducer = (state = initialState, action) => {
         isLoadingLOGIN: false,
         successLOGIN: true,
         username: action.user,
-        password: action.password
+        // password: action.password,
+        token: action.payload
       };
     case LOGIN_FAILURE:
       return {
@@ -85,15 +77,6 @@ export const loginReducer = (state = initialState, action) => {
         username: "",
         password: ""
       };
-    default:
-      return state;
-  }
-};
-
-// ITEMS
-
-export const itemReducer = (state = initialState, action) => {
-  switch (action.type) {
     case ADDING_ITEM:
       return {
         ...state,

@@ -32,24 +32,23 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const login = user => dispatch => {
+export const logInUser = user => dispatch => {
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
     .post(`api/auth/login`, user)
-    .then(res => {
+    .then(res =>
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data.token,
         user: user.username
-      });
-      // return true;
-    })
-    .catch(res => {
+      })
+    )
+    .catch(res =>
       dispatch({
         type: LOGIN_FAILURE,
         payload: res.data
-      });
-    });
+      })
+    );
 };
 
 // Items Action

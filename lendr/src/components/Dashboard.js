@@ -11,9 +11,15 @@ import LendItemsCard from "./LendItems/LendItemsCard";
 import { connect } from "react-redux";
 import { addLendItems } from "../store/actions/index";
 import { itemReducer } from "../store/reducers/index";
-import LendItemsContainer from "./LendItems/LendItemsContainer";
+// Styles
+import { Button, Icon } from "antd";
+import "./Dashboard.scss";
 
 function Dashboard(props) {
+  const redirect = link => {
+    props.history.push(link);
+  };
+
   return (
     <>
       <div className="nav">
@@ -30,18 +36,22 @@ function Dashboard(props) {
         <h1>Your Dashboard</h1>
       </div>
       <div className="dashboard-button">
-        <Link to="/lendItem">
-          <button className="md-button lend-item-button">Lend an Item</button>
-        </Link>
+        <Button
+          type="primary"
+          className="md-button lend-item-button"
+          onClick={() => redirect(`/items`)}
+        >
+          <span>Lend an Item</span>
+        </Button>
         <h1>My Items</h1>
         <div className="items-container">
-          {this.props.data &&
+          {/* {this.props.data &&
             this.props.data.map(data => (
               <LendItemsCard key={data.id} data={data} />
-            ))}
+            ))} */}
+          <LendItemsCard />
         </div>
       </div>
-      <Route path="/lendItem" component={LendItemsContainer} />
     </>
   );
 }
