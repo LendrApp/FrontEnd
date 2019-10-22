@@ -7,6 +7,10 @@ import { Route, Link } from "react-router-dom";
 import "../App.css";
 import LendItem from "./LendItem";
 import Login from "./Login";
+import LendItemsCard from "./LendItems/LendItemsCard";
+import { connect } from "react-redux";
+import { addLendItems } from "../store/actions/index";
+import { itemReducer } from "../store/reducers/index";
 
 function Dashboard(props) {
   return (
@@ -28,9 +32,27 @@ function Dashboard(props) {
         <Link to="/lendItem">
           <button className="md-button lend-item-button">Lend an Item</button>
         </Link>
+        <h1>My Items</h1>
+        <div className="items-container">
+          {this.props.data &&
+            this.props.data.map(data => (
+              <LendItemsCard key={data.id} data={data} />
+            ))}
+        </div>
       </div>
       <Route path="/lendItem" component={LendItem} />
     </>
   );
 }
+
+const mapStateToProps = state => ({
+  data: state.itemReducer.data,
+  fetching: state.itemReducer.fetching,
+  error: state.itemReducer.error
+});
+export default connect(
+  mapStateToProps,
+  { addLendItems }
+)(MyItems);
+
 export default Dashboard;

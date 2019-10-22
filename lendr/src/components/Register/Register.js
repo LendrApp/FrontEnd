@@ -50,7 +50,19 @@ const Register = props => {
     <div class="sign-up-container">
       <Form {...formItemLayout} onSubmit={handleSubmit}>
         <h2 className="sign-up">Sign Up</h2>
-        <Form.Item label="User name">
+
+        <Form.Item label="Full name">
+          {getFieldDecorator("fullName", {
+            rules: [
+              {
+                required: true,
+                message: "Please enter your full name!"
+              }
+            ]
+          })(<Input name="fullName" />)}
+        </Form.Item>
+
+        <Form.Item label="Username">
           {getFieldDecorator("username", {
             rules: [
               {
@@ -70,6 +82,17 @@ const Register = props => {
               }
             ]
           })(<Input.Password name="password" />)}
+        </Form.Item>
+
+        <Form.Item label="Email">
+          {getFieldDecorator("email", {
+            rules: [
+              {
+                required: true,
+                message: "Please enter your email!"
+              }
+            ]
+          })(<Input name="email" />)}
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
