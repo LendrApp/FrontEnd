@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import LendItemsCard from "./LendItemsCard";
-import { addUser } from "../../store/actions";
+import LendItemsForm from "./LendItemsForm";
+import { addLendItems } from "../../store/actions";
+import "./LendItems.scss";
 
 const LendItemsContainer = props => {
   console.log(`THIS IS PROPS IN LENDITEMSCONTAINER`, props);
   useEffect(() => {
-    props.addUser();
+    props.addLendItems();
   }, []);
 
   if (props.users) {
@@ -15,18 +17,22 @@ const LendItemsContainer = props => {
   }
 
   return (
-    <div>
-      {props.users.map((user, index) => {
+    <>
+      <LendItemsForm />
+      <div className="main-cards-container">
+        {/* {props.itemData.map((user, index) => {
         return <LendItemsCard key={index} user={user} />;
-      })}
-    </div>
+      })} */}
+        <LendItemsCard />
+      </div>
+    </>
   );
 };
 
 const mapStateToProps = state => {
   console.log(`MSTP STATE`, state);
   return {
-    users: state.users,
+    itemData: state.itemData,
     fetchingData: state.fetchingData,
     error: state.error
   };
@@ -35,6 +41,8 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    addUser
+    addLendItems
   }
 )(LendItemsContainer);
+
+// export default LendItemsContainer;
