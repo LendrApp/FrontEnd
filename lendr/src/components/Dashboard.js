@@ -5,12 +5,13 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
 import "../App.css";
-import LendItem from "./LendItem";
+// import LendItem from "./LendItem";
 import Login from "./Login";
 import LendItemsCard from "./LendItems/LendItemsCard";
 import { connect } from "react-redux";
 import { addLendItems } from "../store/actions/index";
 import { itemReducer } from "../store/reducers/index";
+import LendItemsContainer from "./LendItems/LendItemsContainer";
 
 function Dashboard(props) {
   return (
@@ -40,19 +41,18 @@ function Dashboard(props) {
             ))}
         </div>
       </div>
-      <Route path="/lendItem" component={LendItem} />
+      <Route path="/lendItem" component={LendItemsContainer} />
     </>
   );
 }
 
-const mapStateToProps = state => ({
-  data: state.itemReducer.data,
-  fetching: state.itemReducer.fetching,
-  error: state.itemReducer.error
-});
-export default connect(
-  mapStateToProps,
-  { addLendItems }
-)(MyItems);
-
+// const mapStateToProps = state => ({
+//   data: state.itemReducer.data,
+//   fetching: state.itemReducer.fetching,
+//   error: state.itemReducer.error
+// });
+// export default connect(
+//   mapStateToProps,
+//   { addLendItems }
+// )(Dashboard);
 export default Dashboard;

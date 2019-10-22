@@ -23,7 +23,7 @@
   color: #09d3ac;
 }
 
-.header-contain{
+.header-contain {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,8 +50,9 @@
   align-items: center;
 }
 
-.card-body, .login-form {
-  /* background-color: #c7ad88; */
+.card-body,
+.login-form {
+  background-color: #c7ad88;
 }
 
 .card-text {
@@ -60,7 +61,7 @@
 
 .card-link {
   border: 2px solid black;
-  padding: .5rem 2rem;
+  padding: 0.5rem 2rem;
   color: black;
 }
 

@@ -9,7 +9,7 @@ export const REGISTRATION_FAILURE = "REGISTRATION_FAILURE";
 export const addUser = user => dispatch => {
   dispatch({ type: REGISTRATION_START });
   axiosWithAuth()
-    .post(`https://lenders-app.herokuapp.com/api/auth/register`, {
+    .post(`api/auth/register`, {
       fullName: user.fullName,
       username: user.username,
       password: user.password,
@@ -32,16 +32,18 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const login = (username, password) => dispatch => {
+export const login = user => dispatch => {
   dispatch({ type: LOGIN_START });
-  return axiosWithAuth()
-    .post(`https://lenders-app.herokuapp.com/api/auth/login`, {
-      username: username,
-      password: password
-    })
+  axiosWithAuth()
+    .post(`api/auth/login`, user)
+
     .then(res => {
-      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-      return true;
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data.token,
+        user: user.username
+      });
+      // return true;
     })
     .catch(res => {
       dispatch({

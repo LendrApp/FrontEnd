@@ -10,8 +10,6 @@ import {
   ADD_ITEM_FAILURE
 } from "../actions/index";
 
-//REGISTRATION
-
 const initialState = {
   error: "",
   fetchingData: false,
@@ -25,8 +23,11 @@ const initialState = {
   email: "",
   itemData: [],
   addItem: false,
-  data: []
+  data: [],
+  token: localStorage.getItem("token")
 };
+
+// REGISTRATION
 
 export const registrationReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -66,12 +67,15 @@ export const loginReducer = (state = initialState, action) => {
         successLOGIN: false
       };
     case LOGIN_SUCCESS:
+      localStorage.setItem("token", action.payload);
+      localStorage.setItem("username", action.payload);
+
       return {
         ...state,
         isLoadingLOGIN: false,
         successLOGIN: true,
-        username: action.payload,
-        password: action.payload
+        username: action.user,
+        password: action.password
       };
     case LOGIN_FAILURE:
       return {
