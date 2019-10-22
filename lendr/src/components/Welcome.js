@@ -26,7 +26,6 @@ const Welcome = () => {
         </Card>
       </CardGroup>
     </div>
-  )
-}
-
+  );
+};
 export default Welcome;

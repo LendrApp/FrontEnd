@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+
+// styles
+import { Button } from "antd";
+import "./LendItems.scss";
 
 const LendItemsForm = props => {
   console.log(`LendItemsForm`, props);
@@ -20,7 +25,7 @@ const LendItemsForm = props => {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <form id="clear-input">
         <input
           type="text"
@@ -32,20 +37,28 @@ const LendItemsForm = props => {
         <input
           type="text"
           name="cost"
-          placeholder="How much"
+          placeholder="How much?"
           value={props.cost}
           onChange={handleChanges}
         />
-        <input
+        {/* <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={props.description}
+          onChange={handleChanges}
+        /> */}
+        <textarea
           type="text"
           name="description"
           placeholder="Description"
           value={props.description}
           onChange={handleChanges}
         />
-        <button type="submit" onClick={handleSubmit}>
+
+        <Button type="primary" onClick={handleSubmit}>
           Lend Item
-        </button>
+        </Button>
       </form>
     </div>
   );

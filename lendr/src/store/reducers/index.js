@@ -19,8 +19,10 @@ const initialState = {
   addUser: [],
   isLoadingLOGIN: false,
   successLOGIN: false,
+  fullName: "",
   username: "",
   password: "",
+  email: "",
   itemData: [],
   addItem: false,
   data: []

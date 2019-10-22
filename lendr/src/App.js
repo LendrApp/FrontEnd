@@ -15,8 +15,9 @@ function App() {
   return (
     <div className="App">
       <Welcome />
+      <LendItemsContainer />
       <PrivateRoute path="/secret" component={ExampleComponent} />
-      <PrivateRoute exact path="/items" component={LendItemsContainer} />
+      {/* <PrivateRoute exact path="/items" component={LendItemsContainer} /> */}
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
     </div>
