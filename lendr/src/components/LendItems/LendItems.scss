@@ -1,0 +1,64 @@
+@import "../../App.scss";
+
+.main-cards-container {
+  margin: 5rem auto 0;
+  width: 75%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item-card-container {
+  // border: 0.5px solid #d9d9d9;
+  // color: rgba(0, 0, 0, 0.65);
+  // width: 20%;
+  // border-radius: 10px;
+  // height: 10rem;
+  // padding: 1rem;
+
+  h5 {
+    margin-top: 1rem;
+  }
+}
+
+// form
+
+.form-container {
+  // display: flex;
+  // justify-content: center;
+  // // margin: 8% auto;
+  // line-height: 1.5;
+  // background: rgb(245, 247, 248);
+  // border-radius: 20px;
+  width: 20%;
+  margin: 1rem auto;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 0 auto;
+
+    input {
+      font-size: 14px;
+      margin-top: 1rem;
+      border-radius: 4px;
+      padding: 4px 11px;
+      border: 1px solid #d9d9d9;
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    textarea {
+      font-size: 14px;
+      margin-top: 1rem;
+      border-radius: 4px;
+      padding: 4px 11px;
+      border: 1px solid #d9d9d9;
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    button {
+      width: 50%;
+      margin: 1rem auto 0;
+    }
+  }
+}
