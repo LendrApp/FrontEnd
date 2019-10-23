@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import LendItemsForm from "./LendItemsForm";
-import { addLendItems } from "../../store/actions";
+import LendItemsCard from "./LendItemsCard";
+import { fetchItem } from "../../store/actions";
 import "./LendItems.scss";
 
 const LendItemsContainer = props => {
   console.log(`THIS IS PROPS IN LENDITEMSCONTAINER`, props);
   useEffect(() => {
-    props.addLendItems();
-  }, [props]);
+    props.fetchItem();
+  }, []);
 
   if (props.users) {
     return <h2>Loading Items...</h2>;
@@ -18,16 +19,16 @@ const LendItemsContainer = props => {
     <>
       <LendItemsForm />
       <div className="main-cards-container">
-        {/* {props.itemData.map((user, index) => {
-        return <LendItemsCard key={index} user={user} />;
-      })} */}
+        {props.itemData.map((items, index) => {
+          return <LendItemsCard key={index} items={items} />;
+        })}
       </div>
     </>
   );
 };
 
 const mapStateToProps = state => {
-  console.log(`MSTP STATE`, state);
+  console.log(`MSTP STATE`, state.itemData);
   return {
     itemData: state.itemData,
     fetchingData: state.fetchingData,
@@ -38,8 +39,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    addLendItems
+    fetchItem
   }
 )(LendItemsContainer);
-
-// export default LendItemsContainer;

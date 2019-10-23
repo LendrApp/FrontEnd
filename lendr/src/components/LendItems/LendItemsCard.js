@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LendItems.scss";
 import { Card, Icon } from "antd";
 
@@ -6,7 +6,6 @@ const { Meta } = Card;
 
 const LendItemsCard = props => {
   console.log(`LENDITEMSCARD PROPS`, props);
-
   return (
     <div className="item-card-container">
       {/* <p>Item: </p>
@@ -30,10 +29,10 @@ const LendItemsCard = props => {
           // avatar={
           //   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           // }
-          title="Item"
-          description="This is the description"
+          title="`${props.items.name}`"
+          description="`${props.items.description}`"
         />
-        <h5> $400/DAY</h5>
+        <h5> {props.items}/DAY</h5>
       </Card>
     </div>
   );
