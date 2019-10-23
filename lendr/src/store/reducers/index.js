@@ -17,6 +17,7 @@ import {
 // REGISTRATION
 
 export const reducer = (state = initialState, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case REGISTRATION_START:
       return {
@@ -46,15 +47,16 @@ export const reducer = (state = initialState, action) => {
       };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload);
-      localStorage.setItem("username", action.payload);
+      localStorage.setItem("username", action.user);
 
       return {
         ...state,
         isLoadingLOGIN: false,
         successLOGIN: true,
-        username: action.user,
+
         // password: action.password,
-        token: action.payload
+        token: action.payload,
+        username: action.user
       };
     case LOGIN_FAILURE:
       return {
@@ -129,7 +131,7 @@ const initialState = {
   addUser: [],
   isLoadingLOGIN: false,
   successLOGIN: false,
-  fullName: "",
+  fullName: localStorage.getItem("fullName"),
   username: localStorage.getItem("username"),
   password: "",
   email: "",

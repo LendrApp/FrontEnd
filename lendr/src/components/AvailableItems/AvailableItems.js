@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Icon } from "antd";
+import { Card, Button } from "antd";
 
 const { Meta } = Card;
 
@@ -16,8 +16,8 @@ const AvailableItems = () => {
           />
         }
         actions={[
-          <Icon type="delete" key="delete" />,
-          <Icon type="edit" key="edit" />
+          <Button type="primary">Borrow Item</Button>
+
           // <Icon type="ellipsis" key="ellipsis" />
         ]}
       >
