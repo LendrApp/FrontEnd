@@ -42,7 +42,7 @@ const NavBar = props => {
           </Link>
         )}
         {token && (
-          <Link className="link" to="/items">
+          <Link className="link" to="/available-items">
             Borrow Item
           </Link>
         )}
