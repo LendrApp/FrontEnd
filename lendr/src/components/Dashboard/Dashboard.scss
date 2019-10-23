@@ -1,1 +1,21 @@
 @import "../../App.scss";
+
+.border-line {
+  margin-top: 5rem;
+  border: 1px solid #e8e8e8;
+}
+
+.items-main-container {
+  display: flex;
+}
+
+.lend-items {
+  width: 50%;
+  height: 100vh;
+}
+
+.borrowed-items {
+  height: 100vh;
+  width: 50%;
+  border-left: 1px solid #e8e8e8;
+}

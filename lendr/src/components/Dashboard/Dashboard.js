@@ -45,13 +45,28 @@ const Dashboard = props => {
         >
           Lend an Item
         </Button>
-        <h2>My Items</h2>
-        <div className="items-container">
-          {/* {props.userItems &&
+        <div className="border-line"></div>
+        <div className="items-main-container">
+          <div className="lend-items">
+            <h2 className="h2">My Items</h2>
+            <div className="items-container">
+              {/* {props.userItems &&
             props.userItems.user.map(data => (
               <LendItemsCard key={data.id} data={data} />
             ))} */}
-          <LendItemsCard />
+              <LendItemsCard />
+            </div>
+          </div>
+          <div className="borrowed-items">
+            <h2 className="h2">Borrowed Items</h2>
+            <div className="items-container">
+              {/* {props.userItems &&
+            props.userItems.user.map(data => (
+              <LendItemsCard key={data.id} data={data} />
+            ))} */}
+              <LendItemsCard />
+            </div>
+          </div>
         </div>
       </div>
     </>
