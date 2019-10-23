@@ -126,7 +126,7 @@ export const EDIT_START = "EDIT_START";
 export const updateItem = id => dispatch => {
   dispatch({ type: EDIT_START });
   axiosWithAuth()
-    .put(`Idk yet`)
+    .put(`https://lenders-app.herokuapp.com/api/items/:id`)
     .then(res => {
       dispatch({ type: FETCH_SUCCESS, payload: res.data });
     })
@@ -141,7 +141,7 @@ export const ITEM_DETAIL_SUCCESS = "ITEM_DETAIL_SUCCESS";
 export const itemDetail = id => dispatch => {
   dispatch({ type: ITEM_DETAIL_START });
   axiosWithAuth()
-    .get(`IDK YET`)
+    .get(`https://lenders-app.herokuapp.com/api/items/:id`)
     .then(res => {
       // console.log(res)
       dispatch({ type: ITEM_DETAIL_SUCCESS, payload: res.data });
@@ -156,7 +156,7 @@ export const DELETE_ITEM_FAILURE = "DELETE_ITEM_FAILURE";
 export const deleteItem = id => dispatch => {
   dispatch({ type: DELETE_ITEM_START });
   axiosWithAuth()
-    .delete(`/:user_id/posts/:post_id/instructions/:instruction_id`)
+    .delete(`https://lenders-app.herokuapp.com/api/items/:id`)
     .then(res => {
       console.log(res.data.message);
       dispatch({ type: DELETE_ITEM_SUCCESS, payload: res.data });
