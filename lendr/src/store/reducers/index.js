@@ -7,29 +7,16 @@ import {
   LOGIN_FAILURE,
   ADDING_ITEM,
   ADD_ITEM_SUCCESS,
-  ADD_ITEM_FAILURE
+  ADD_ITEM_FAILURE,
+  LOG_OUT,
+  FETCHING_USER,
+  FETCH_USER_SUCCESS,
+  FETCHING_FAILURE
 } from "../actions/index";
-
-const initialState = {
-  error: "",
-  fetchingData: false,
-  users: [],
-  addUser: [],
-  isLoadingLOGIN: false,
-  successLOGIN: false,
-  fullName: "",
-  username: "",
-  password: "",
-  email: "",
-  itemData: [],
-  addItem: false,
-  data: [],
-  token: localStorage.getItem("token")
-};
 
 // REGISTRATION
 
-export const registrationReducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTRATION_START:
       return {
@@ -51,15 +38,6 @@ export const registrationReducer = (state = initialState, action) => {
         error: action.payload,
         fetchingData: false
       };
-    default:
-      return state;
-  }
-};
-
-//LOGIN
-
-export const loginReducer = (state = initialState, action) => {
-  switch (action.type) {
     case LOGIN_START:
       return {
         ...state,
@@ -75,7 +53,8 @@ export const loginReducer = (state = initialState, action) => {
         isLoadingLOGIN: false,
         successLOGIN: true,
         username: action.user,
-        password: action.password
+        // password: action.password,
+        token: action.payload
       };
     case LOGIN_FAILURE:
       return {
@@ -85,15 +64,6 @@ export const loginReducer = (state = initialState, action) => {
         username: "",
         password: ""
       };
-    default:
-      return state;
-  }
-};
-
-// ITEMS
-
-export const itemReducer = (state = initialState, action) => {
-  switch (action.type) {
     case ADDING_ITEM:
       return {
         ...state,
@@ -115,7 +85,60 @@ export const itemReducer = (state = initialState, action) => {
         error: action.payload
       };
 
+    case LOG_OUT:
+      localStorage.clear();
+      return {
+        ...initialState,
+        token: ""
+      };
+    case FETCHING_USER:
+      localStorage.setItem("user", JSON.stringify(action.payload));
+      return {
+        ...state,
+        fetchingData: true,
+        fetching_message: "Looking for user...",
+        singleItem: ""
+      };
+
+    case FETCH_USER_SUCCESS:
+      // localStorage.setItem("user", JSON.stringify(action.payload));
+      return {
+        ...state,
+        fetchingData: false,
+        fetching_message: "",
+        userItems: action.payload,
+        error: false
+      };
+    case FETCHING_FAILURE:
+      return {
+        ...state,
+        fetchingData: false,
+        error: true
+      };
+
     default:
       return state;
   }
+};
+
+const initialState = {
+  error: "",
+  fetchingData: false,
+  fetching_message: "",
+  users: [],
+  addUser: [],
+  isLoadingLOGIN: false,
+  successLOGIN: false,
+  fullName: "",
+  username: localStorage.getItem("username"),
+  password: "",
+  email: "",
+  itemData: [],
+  addItem: false,
+  data: [],
+  token: localStorage.getItem("token"),
+  // singleItem: JSON.parse(localStorage.getItem("item")),
+  // userItems: JSON.parse(localStorage.getItem("user"))
+  singleItem: localStorage.getItem("item"),
+  userItems: localStorage.getItem("user")
 };

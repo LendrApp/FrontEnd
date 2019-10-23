@@ -1,17 +1,12 @@
 import React from "react";
-import "./LendItems.scss";
 import { Card, Icon } from "antd";
 
 const { Meta } = Card;
 
-const LendItemsCard = props => {
-  console.log(`LENDITEMSCARD PROPS`, props);
-
+const AvailableItems = () => {
   return (
-    <div className="item-card-container">
-      {/* <p>Item: </p>
-      <p>Cost: </p>
-      <p>Description: </p> */}
+    <div>
+      <h2>Lend an Item!</h2>
       <Card
         style={{ width: 300 }}
         cover={
@@ -39,4 +34,4 @@ const LendItemsCard = props => {
   );
 };
 
-export default LendItemsCard;
+export default AvailableItems;

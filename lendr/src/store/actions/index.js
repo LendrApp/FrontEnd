@@ -32,25 +32,44 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export const login = user => dispatch => {
+export const logInUser = user => dispatch => {
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
     .post(`api/auth/login`, user)
-
-    .then(res => {
+    .then(res =>
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data.token,
         user: user.username
-      });
-      // return true;
-    })
-    .catch(res => {
+      })
+    )
+    .catch(res =>
       dispatch({
         type: LOGIN_FAILURE,
         payload: res.data
-      });
-    });
+      })
+    );
+};
+
+// Logout Action
+export const LOG_OUT = "LOG_OUT";
+export const logOut = () => {
+  return { type: LOG_OUT };
+};
+
+// Fetching User Action
+export const FETCHING_USER = "FETCHING_USER";
+export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCHING_FAILURE = "FETCH_FAILURE";
+
+export const fetchUser = username => dispatch => {
+  dispatch({ type: FETCHING_USER });
+  axiosWithAuth()
+    .get(`/api/auth/users/${username}`)
+    .then(res => dispatch({ type: FETCH_USER_SUCCESS, payload: res.data }))
+    .catch(err =>
+      dispatch({ type: FETCHING_FAILURE, payload: err.response.data.code })
+    );
 };
 
 // Items Action

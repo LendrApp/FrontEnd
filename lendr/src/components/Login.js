@@ -2,31 +2,35 @@ import React, { useState, useEffect } from "react";
 import { Button, Label } from "reactstrap";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+// import axios from "axios";
 import "../App.css";
-import { connect } from "react-redux";
-import { login } from "../store/actions";
 
-const UserLogin = ({ errors, touched, token, history }) => {
-  const [user, setUser] = useState({ username: "", password: "" });
+import { connect } from "react-redux";
+
+import { logInUser } from "../../src/store/actions";
+
+const UserLogin = ({ touched, errors, logInUser, history, token }) => {
+  const [user, setUser] = useState({
+    userName: "",
+    password: ""
+  });
+
   useEffect(() => {
     if (token) {
-      history.push("./dashboard");
+      history.push("/dashboard");
     }
-    // status && setUser(user => [...user, status]);
   }, [history, token]);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(e);
-    if (user.username && user.password) {
-      login(user);
-      setUser({ username: "", password: "" });
-    }
-  };
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (user.username && user.password) {
+      logInUser(user);
+      setUser({ username: "", password: "" });
+    }
   };
 
   return (
@@ -37,7 +41,6 @@ const UserLogin = ({ errors, touched, token, history }) => {
         name="username"
         placeholder="Enter your Username"
         autoComplete="username"
-        value={user.username}
       ></Field>
       {touched.username && errors.username && (
         <p className="error">{errors.username}</p>
@@ -48,14 +51,17 @@ const UserLogin = ({ errors, touched, token, history }) => {
         name="password"
         placeholder="Enter your Password"
         autoComplete="current-password"
-        value={user.password}
       ></Field>
       {touched.password && errors.password && (
         <p className="error">{errors.password}</p>
       )}
-      <Button onClick={e => handleSubmit(e)} type="submit">
+      <Button type="submit" onClick={e => handleSubmit(e)}>
         Submit
       </Button>
+      <img
+        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+        alt="IMG"
+      ></img>
     </Form>
   );
 };
@@ -72,26 +78,15 @@ const LoginWithFormik = withFormik({
     username: Yup.string().required("Please enter a username!"),
     password: Yup.string().required("Please enter a password!")
   })
-
-  // handleSubmit(values, { setStatus }) {
-  //   axios
-  //     .post("https://lenders-app.herokuapp.com/api/auth/login", values)
-  //     .then(res => {
-  //       setStatus(res.data);
-  //       console.log(res);
-  //     })
-  //     .catch(err => console.log(err.response));
-  // }
 })(UserLogin);
 
 const mapStateToProps = state => {
+  console.log(`THIS IS MSTP STATE IN LOGIN`, state);
   return {
     token: state.token
-    // fetching: state.itemReducer.fetching,
-    // error: state.itemReducer.error
   };
 };
 export default connect(
   mapStateToProps,
-  { login }
+  { logInUser: logInUser }
 )(LoginWithFormik);

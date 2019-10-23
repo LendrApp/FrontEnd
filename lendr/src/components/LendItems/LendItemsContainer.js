@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-
-import LendItemsCard from "./LendItemsCard";
 import LendItemsForm from "./LendItemsForm";
 import { addLendItems } from "../../store/actions";
 import "./LendItems.scss";
@@ -10,7 +8,7 @@ const LendItemsContainer = props => {
   console.log(`THIS IS PROPS IN LENDITEMSCONTAINER`, props);
   useEffect(() => {
     props.addLendItems();
-  }, []);
+  }, [props]);
 
   if (props.users) {
     return <h2>Loading Items...</h2>;
@@ -23,7 +21,6 @@ const LendItemsContainer = props => {
         {/* {props.itemData.map((user, index) => {
         return <LendItemsCard key={index} user={user} />;
       })} */}
-        <LendItemsCard />
       </div>
     </>
   );
