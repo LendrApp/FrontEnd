@@ -72,6 +72,25 @@ export const fetchUser = username => dispatch => {
     );
 };
 
+// Fetching items
+
+export const FETCH_START = "FETCH_START";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const FETCH_FAILURE = "FETCH_FAILURE";
+
+export const fetchItem = getStuff => dispatch => {
+  dispatch({ type: FETCH_START });
+  axiosWithAuth()
+    .get(`https://lenders-app.herokuapp.com/api/items`, getStuff)
+    .then(res => {
+      console.log("fetched items", res);
+      dispatch({ type: FETCH_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FETCH_FAILURE, payload: err.response });
+    });
+};
+
 // Items Action
 export const ADDING_ITEM = "ADDING_ITEM";
 export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS";
@@ -80,7 +99,7 @@ export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
 export const addLendItems = lendItems => dispatch => {
   dispatch({ type: ADDING_ITEM });
   return axiosWithAuth()
-    .post(``, lendItems)
+    .post(`https://lenders-app.herokuapp.com/api/items`, lendItems)
     .then(res => {
       dispatch({
         type: ADD_ITEM_SUCCESS,
@@ -103,10 +122,10 @@ export const updateItem = id => dispatch => {
   axiosWithAuth()
     .put(`Idk yet`)
     .then(res => {
-      //   dispatch({ type: FETCH_SUCCESS, payload: res.data });
-      // })
-      // .catch(err => {
-      //   dispatch({ type: FETCH_FAILURE, payload: err.response });
+      dispatch({ type: FETCH_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: FETCH_FAILURE, payload: err.response });
     });
 };
 
