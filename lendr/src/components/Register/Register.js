@@ -96,7 +96,7 @@ const Register = props => {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" className='register-button'>
             Register
           </Button>
         </Form.Item>
