@@ -1,6 +1,8 @@
 import React from "react";
 import "./LendItems.scss";
 import { Card, Icon } from "antd";
+import { NavLink } from "react-router-dom";
+import { updateItem, deleteItem } from "../../store/actions";
 
 const { Meta } = Card;
 
@@ -21,8 +23,20 @@ const LendItemsCard = props => {
           />
         }
         actions={[
-          <Icon type="delete" key="delete" />,
-          <Icon type="edit" key="edit" />
+          <div className="btnctnr">
+            <button
+              onClick={() => {
+                props.deleteItem(props.data.id);
+              }}
+            >
+              Delete
+            </button>
+            <Icon type="delete" key="delete" />,
+            <NavLink to={`/items/${props.data.id}/edit`}>
+              <button>Edit</button>
+            </NavLink>
+            <Icon type="edit" key="edit" />
+          </div>
           // <Icon type="ellipsis" key="ellipsis" />
         ]}
       >
