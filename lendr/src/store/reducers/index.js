@@ -115,7 +115,8 @@ export const reducer = (state = initialState, action) => {
     case FETCH_START:
       return { ...state, fetching: true };
     case FETCH_SUCCESS:
-      return { ...state, data: action.payload, fetching: false };
+      console.log(`ADDING ITEMS`, FETCH_SUCCESS);
+      return { ...state, itemData: action.payload, fetching: false };
     case FETCH_FAILURE:
       return { ...state, error: action.payload, fetching: false };
 
@@ -125,7 +126,7 @@ export const reducer = (state = initialState, action) => {
     case ITEM_DETAIL_START:
       return { ...state, fetching: true };
     case ITEM_DETAIL_SUCCESS:
-      return { ...state, data: action.payload, fetching: false };
+      return { ...state, itemData: action.payload, fetching: false };
 
     // DELETE
     case DELETE_ITEM_START:
@@ -185,6 +186,8 @@ const initialState = {
   addItem: false,
   data: [],
   token: localStorage.getItem("token"),
-  singleItem: localStorage.getItem("item"),
+  // singleItem: localStorage.getItem("item"),
+  // userItems: localStorage.getItem("user")
+  singleItem: "",
   userItems: localStorage.getItem("user")
 };

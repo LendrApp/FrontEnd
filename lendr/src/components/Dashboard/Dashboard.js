@@ -75,8 +75,8 @@ const Dashboard = props => {
 
 const mapStateToProps = state => {
   return {
-    userItems: state.userItems,
-    username: state.username
+    // userItems: state.userItems,
+    // username: state.username
   };
 };
 

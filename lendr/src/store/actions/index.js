@@ -83,10 +83,10 @@ export const FETCH_START = "FETCH_START";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAILURE = "FETCH_FAILURE";
 
-export const fetchItem = getStuff => dispatch => {
+export const fetchItem = () => dispatch => {
   dispatch({ type: FETCH_START });
   axiosWithAuth()
-    .get(`https://lenders-app.herokuapp.com/api/items`, getStuff)
+    .get(`/api/items`)
     .then(res => {
       console.log("fetched items", res);
       dispatch({ type: FETCH_SUCCESS, payload: res.data });
@@ -103,9 +103,10 @@ export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
 
 export const addLendItems = lendItems => dispatch => {
   dispatch({ type: ADDING_ITEM });
-  return axiosWithAuth()
-    .post(`https://lenders-app.herokuapp.com/api/items`, lendItems)
+  axiosWithAuth()
+    .post(`/api/items${lendItems.id}`, lendItems)
     .then(res => {
+      console.log(`ADD ITEMS`, res);
       dispatch({
         type: ADD_ITEM_SUCCESS,
         payload: res.data

@@ -17,7 +17,6 @@ const AvailableItems = () => {
           onSearch={value => console.log(value)}
         />
       </div>
-
       <Card
         style={{ width: 300 }}
         cover={
