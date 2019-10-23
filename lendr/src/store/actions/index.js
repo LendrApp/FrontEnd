@@ -1,4 +1,5 @@
 import axiosWithAuth from "../../utils/axiosWithAuth";
+import { OmitProps } from "antd/lib/transfer/renderListBody";
 
 //Registration Action
 
@@ -49,6 +50,12 @@ export const logInUser = user => dispatch => {
         payload: res.data
       })
     );
+};
+
+// Logout Action
+export const LOG_OUT = "LOG_OUT";
+export const logOut = () => {
+  return { type: LOG_OUT };
 };
 
 // Items Action

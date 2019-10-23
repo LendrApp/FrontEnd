@@ -9,8 +9,11 @@ import { connect } from "react-redux";
 
 import { logInUser } from "../../src/store/actions";
 
-const UserLogin = ({ errors, touched, history, token }) => {
-  const [user, setUser] = useState({ username: "", password: "" });
+const UserLogin = ({ touched, errors, logInUser, history, token }) => {
+  const [user, setUser] = useState({
+    userName: "",
+    password: ""
+  });
 
   useEffect(() => {
     if (token) {

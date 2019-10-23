@@ -4,13 +4,13 @@
 
 import React from "react";
 import { Route, Link } from "react-router-dom";
-import "../App.css";
+// import "../../App.css";
 // import LendItem from "./LendItem";
-import Login from "./Login";
-import LendItemsCard from "./LendItems/LendItemsCard";
-import { connect } from "react-redux";
-import { addLendItems } from "../store/actions/index";
-import { itemReducer } from "../store/reducers/index";
+import Login from "../Login";
+import LendItemsCard from "../LendItems/LendItemsCard";
+// import { connect } from "react-redux";
+// import { addLendItems } from "../../store/actions/index";
+// import { itemReducer } from "../../store/reducers/index";
 // Styles
 import { Button, Icon } from "antd";
 import "./Dashboard.scss";
@@ -23,12 +23,11 @@ function Dashboard(props) {
   return (
     <>
       <div className="nav">
-        <h1>Lendr</h1>
         <nav>
           <div className="nav-links">
-            <a href="">Home</a>
+            {/* <a href="">Home</a>
             <Link to="/dashboard">Dashboard</Link>
-            <Route path="/login" component={Login} />
+            <Route path="/login" component={Login} /> */}
           </div>
         </nav>
       </div>

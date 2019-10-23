@@ -7,7 +7,8 @@ import {
   LOGIN_FAILURE,
   ADDING_ITEM,
   ADD_ITEM_SUCCESS,
-  ADD_ITEM_FAILURE
+  ADD_ITEM_FAILURE,
+  LOG_OUT
 } from "../actions/index";
 
 const initialState = {
@@ -98,6 +99,12 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       };
 
+    case LOG_OUT:
+      localStorage.clear();
+      return {
+        ...initialState,
+        token: ""
+      };
     default:
       return state;
   }
