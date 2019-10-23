@@ -7,7 +7,7 @@ const { Search } = Input;
 
 const AvailableItems = () => {
   return (
- darren-carrillo
+    <div>
       <h2>Borrow an Item!</h2>
       <div className="search">
         <Search

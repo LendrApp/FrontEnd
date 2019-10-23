@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { addLendItems } from "../../store/actions";
 
 // styles
 import { Button } from "antd";
@@ -9,8 +10,8 @@ const LendItemsForm = props => {
   console.log(`LendItemsForm`, props);
 
   const [lendItem, setLendItem] = useState({
-    itemName: "",
-    cost: "",
+    name: "",
+    price: "",
     description: ""
   });
 
@@ -20,8 +21,12 @@ const LendItemsForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.addLendItem(lendItem);
-    document.getElementById("clear-input").reset();
+    // props.addLendItem(lendItem);
+    // document.getElementById("clear-input").reset();
+    if (id) {
+      props.addLendItems(lendItem);
+    }
+    props.history.push("./dashboard");
   };
 
   return (
@@ -31,14 +36,14 @@ const LendItemsForm = props => {
           type="text"
           name="name"
           placeholder="Item Name"
-          value={props.itemName}
+          value={props.name}
           onChange={handleChanges}
         />
         <input
           type="text"
-          name="cost"
+          name="price"
           placeholder="How much?"
-          value={props.cost}
+          value={props.price}
           onChange={handleChanges}
         />
         {/* <input
@@ -57,18 +62,21 @@ const LendItemsForm = props => {
         />
 
         <Button type="primary" onClick={handleSubmit}>
-          <span>Lend Item</span>
+          Lend Item
         </Button>
       </form>
     </div>
   );
 };
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = state => {
+  return {
+    userItems: state.userItems,
+    username: state.username
+  };
 };
 
 export default connect(
   mapStateToProps,
-  {}
+  { addLendItems: addLendItems }
 )(LendItemsForm);
