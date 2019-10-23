@@ -7,7 +7,7 @@ const { Search } = Input;
 
 const AvailableItems = () => {
   return (
-    <div>
+ darren-carrillo
       <h2>Borrow an Item!</h2>
       <div className="search">
         <Search
@@ -17,6 +17,7 @@ const AvailableItems = () => {
           onSearch={value => console.log(value)}
         />
       </div>
+
       <Card
         style={{ width: 300 }}
         cover={
