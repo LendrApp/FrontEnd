@@ -43,15 +43,30 @@ const Dashboard = props => {
           className="md-button lend-item-button"
           onClick={() => redirect(`/items`)}
         >
-          <span>Lend an Item</span>
+          Lend an Item
         </Button>
-        <h1>My Items</h1>
-        <div className="items-container">
-          {/* {props.userItems &&
+        <div className="border-line"></div>
+        <div className="items-main-container">
+          <div className="lend-items">
+            <h2 className="h2">My Items</h2>
+            <div className="items-container">
+              {/* {props.userItems &&
             props.userItems.user.map(data => (
               <LendItemsCard key={data.id} data={data} />
             ))} */}
-          <LendItemsCard />
+              <LendItemsCard />
+            </div>
+          </div>
+          <div className="borrowed-items">
+            <h2 className="h2">Borrowed Items</h2>
+            <div className="items-container">
+              {/* {props.userItems &&
+            props.userItems.user.map(data => (
+              <LendItemsCard key={data.id} data={data} />
+            ))} */}
+              <LendItemsCard />
+            </div>
+          </div>
         </div>
       </div>
     </>

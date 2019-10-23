@@ -1,12 +1,23 @@
 import React from "react";
-import { Card, Icon } from "antd";
+import { Card, Button, Input } from "antd";
+import "./AvailableItems.scss";
 
 const { Meta } = Card;
+const { Search } = Input;
 
 const AvailableItems = () => {
   return (
-    <div>
-      <h2>A List of All Available Items To Borrow!</h2>
+ darren-carrillo
+      <h2>Borrow an Item!</h2>
+      <div className="search">
+        <Search
+          placeholder="Search an item"
+          enterButton="Search"
+          size="large"
+          onSearch={value => console.log(value)}
+        />
+      </div>
+
       <Card
         style={{ width: 300 }}
         cover={
@@ -16,8 +27,8 @@ const AvailableItems = () => {
           />
         }
         actions={[
-          <Icon type="delete" key="delete" />,
-          <Icon type="edit" key="edit" />
+          <Button type="primary">Borrow Item</Button>
+
           // <Icon type="ellipsis" key="ellipsis" />
         ]}
       >

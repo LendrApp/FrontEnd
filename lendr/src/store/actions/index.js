@@ -36,13 +36,15 @@ export const logInUser = user => dispatch => {
   dispatch({ type: LOGIN_START });
   axiosWithAuth()
     .post(`api/auth/login`, user)
-    .then(res =>
+    .then(res => {
+      console.log(res);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data.token,
-        user: user.username
-      })
-    )
+        //  && res.data.user
+        user: res.data.user
+      });
+    })
     .catch(res =>
       dispatch({
         type: LOGIN_FAILURE,
@@ -66,7 +68,10 @@ export const fetchUser = username => dispatch => {
   dispatch({ type: FETCHING_USER });
   axiosWithAuth()
     .get(`/api/auth/users/${username}`)
-    .then(res => dispatch({ type: FETCH_USER_SUCCESS, payload: res.data }))
+    .then(res => {
+      console.log(res);
+      dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
+    })
     .catch(err =>
       dispatch({ type: FETCHING_FAILURE, payload: err.response.data.code })
     );

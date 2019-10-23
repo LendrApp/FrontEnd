@@ -57,7 +57,7 @@ const LendItemsForm = props => {
         />
 
         <Button type="primary" onClick={handleSubmit}>
-          Lend Item
+          <span>Lend Item</span>
         </Button>
       </form>
     </div>
