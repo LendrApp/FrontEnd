@@ -34,7 +34,8 @@ const UserLogin = ({ touched, errors, logInUser, history, token }) => {
   };
 
   return (
-    <Form onChange={handleChange}>
+    <Form className='login-form' onChange={handleChange}>
+      <h2>Log In</h2>
       <Label for="username">Username</Label>
       <Field
         type="text"
@@ -55,12 +56,12 @@ const UserLogin = ({ touched, errors, logInUser, history, token }) => {
       {touched.password && errors.password && (
         <p className="error">{errors.password}</p>
       )}
-      <Button type="submit" onClick={e => handleSubmit(e)}>
+      <Button className="submit" type="submit" onClick={e => handleSubmit(e)}>
         Submit
       </Button>
       <img
-        src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-        alt="IMG"
+        // src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+        // alt="IMG"
       ></img>
     </Form>
   );
