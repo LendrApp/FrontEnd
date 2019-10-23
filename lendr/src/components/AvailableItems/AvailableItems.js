@@ -6,7 +6,7 @@ const { Meta } = Card;
 const AvailableItems = () => {
   return (
     <div>
-      <h2>Lend an Item!</h2>
+      <h2>A List of All Available Items To Borrow!</h2>
       <Card
         style={{ width: 300 }}
         cover={

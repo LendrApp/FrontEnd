@@ -11,7 +11,16 @@ import {
   LOG_OUT,
   FETCHING_USER,
   FETCH_USER_SUCCESS,
-  FETCHING_FAILURE
+  FETCHING_FAILURE,
+  FETCH_START,
+  FETCH_SUCCESS,
+  FETCH_FAILURE,
+  EDIT_START,
+  ITEM_DETAIL_START,
+  ITEM_DETAIL_SUCCESS,
+  DELETE_ITEM_START,
+  DELETE_ITEM_SUCCESS,
+  DELETE_ITEM_FAILURE
 } from "../actions/index";
 
 // REGISTRATION
@@ -38,6 +47,9 @@ export const reducer = (state = initialState, action) => {
         error: action.payload,
         fetchingData: false
       };
+
+    // Login
+
     case LOGIN_START:
       return {
         ...state,
@@ -64,6 +76,9 @@ export const reducer = (state = initialState, action) => {
         username: "",
         password: ""
       };
+
+    //Adding Item
+
     case ADDING_ITEM:
       return {
         ...state,
@@ -85,12 +100,45 @@ export const reducer = (state = initialState, action) => {
         error: action.payload
       };
 
+    //Logging out
+
     case LOG_OUT:
       localStorage.clear();
       return {
         ...initialState,
         token: ""
       };
+
+    // FETCH ITEMS
+    case FETCH_START:
+      return { ...state, fetching: true };
+    case FETCH_SUCCESS:
+      return { ...state, data: action.payload, fetching: false };
+    case FETCH_FAILURE:
+      return { ...state, error: action.payload, fetching: false };
+
+    // EDIT
+    case EDIT_START:
+      return { ...state, fetching: true };
+    case ITEM_DETAIL_START:
+      return { ...state, fetching: true };
+    case ITEM_DETAIL_SUCCESS:
+      return { ...state, data: action.payload, fetching: false };
+
+    // DELETE
+    case DELETE_ITEM_START:
+      return { ...state, deletingItem: true };
+    case DELETE_ITEM_SUCCESS:
+      return {
+        ...state,
+        deletingItem: false,
+        error: "",
+        message: action.payload
+      };
+    case DELETE_ITEM_FAILURE:
+      return { ...state, error: action.payload, fetching: false };
+
+    //Fetching user
     case FETCHING_USER:
       localStorage.setItem("user", JSON.stringify(action.payload));
       return {
@@ -101,7 +149,6 @@ export const reducer = (state = initialState, action) => {
       };
 
     case FETCH_USER_SUCCESS:
-      // localStorage.setItem("user", JSON.stringify(action.payload));
       return {
         ...state,
         fetchingData: false,
@@ -120,7 +167,6 @@ export const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
 const initialState = {
   error: "",
   fetchingData: false,
@@ -137,8 +183,6 @@ const initialState = {
   addItem: false,
   data: [],
   token: localStorage.getItem("token"),
-  // singleItem: JSON.parse(localStorage.getItem("item")),
-  // userItems: JSON.parse(localStorage.getItem("user"))
   singleItem: localStorage.getItem("item"),
   userItems: localStorage.getItem("user")
 };
