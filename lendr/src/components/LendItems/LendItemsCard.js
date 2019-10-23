@@ -1,6 +1,6 @@
 import React from "react";
 import "./LendItems.scss";
-import { Card, Icon, Avatar } from "antd";
+import { Card, Icon } from "antd";
 
 const { Meta } = Card;
 

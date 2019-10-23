@@ -35,9 +35,15 @@ const NavBar = props => {
             Logout
           </Link>
         )}
+
         {token && (
           <Link className="link" to="/items">
             Add items
+          </Link>
+        )}
+        {token && (
+          <Link className="link" to="/items">
+            Borrow Item
           </Link>
         )}
       </nav>

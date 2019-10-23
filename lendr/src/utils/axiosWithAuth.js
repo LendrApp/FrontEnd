@@ -5,7 +5,8 @@ const axiosWithAuth = () => {
 
   return axios.create({
     headers: {
-      Authorization: token
+      "Content-Type": "application/json",
+      authorization: `${token}`
     },
     baseURL: "https://lenders-app.herokuapp.com"
   });

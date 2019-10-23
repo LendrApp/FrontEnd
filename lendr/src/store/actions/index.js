@@ -1,5 +1,4 @@
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import { OmitProps } from "antd/lib/transfer/renderListBody";
 
 //Registration Action
 
@@ -56,6 +55,21 @@ export const logInUser = user => dispatch => {
 export const LOG_OUT = "LOG_OUT";
 export const logOut = () => {
   return { type: LOG_OUT };
+};
+
+// Fetching User Action
+export const FETCHING_USER = "FETCHING_USER";
+export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCHING_FAILURE = "FETCH_FAILURE";
+
+export const fetchUser = username => dispatch => {
+  dispatch({ type: FETCHING_USER });
+  axiosWithAuth()
+    .get(`/api/auth/users/${username}`)
+    .then(res => dispatch({ type: FETCH_USER_SUCCESS, payload: res.data }))
+    .catch(err =>
+      dispatch({ type: FETCHING_FAILURE, payload: err.response.data.code })
+    );
 };
 
 // Items Action

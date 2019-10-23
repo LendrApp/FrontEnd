@@ -2,20 +2,22 @@
 // From here they can view their items lent out and items they've borrowed
 // There will be a button on this page that takes them to LendItem.js
 
-import React from "react";
-import { Route, Link } from "react-router-dom";
-// import "../../App.css";
-// import LendItem from "./LendItem";
-import Login from "../Login";
+import React, { useEffect } from "react";
 import LendItemsCard from "../LendItems/LendItemsCard";
-// import { connect } from "react-redux";
-// import { addLendItems } from "../../store/actions/index";
-// import { itemReducer } from "../../store/reducers/index";
-// Styles
-import { Button, Icon } from "antd";
+import { connect } from "react-redux";
+import { fetchUser } from "../../store/actions";
+
+import { Button } from "antd";
 import "./Dashboard.scss";
 
-function Dashboard(props) {
+const Dashboard = props => {
+  console.log(`USERNAME IN DASHBOARD`, props);
+
+  useEffect(() => {
+    props.fetchUser(props.username);
+    console.log(`props username`, props.username);
+  }, [props]);
+
   const redirect = link => {
     props.history.push(link);
   };
@@ -31,6 +33,7 @@ function Dashboard(props) {
           </div>
         </nav>
       </div>
+      <h2>Hello {props.username}</h2>
       <div className="dashboard-header">
         <h1>Your Dashboard</h1>
       </div>
@@ -44,8 +47,8 @@ function Dashboard(props) {
         </Button>
         <h1>My Items</h1>
         <div className="items-container">
-          {/* {this.props.data &&
-            this.props.data.map(data => (
+          {/* {props.userItems &&
+            props.userItems.user.map(data => (
               <LendItemsCard key={data.id} data={data} />
             ))} */}
           <LendItemsCard />
@@ -53,15 +56,16 @@ function Dashboard(props) {
       </div>
     </>
   );
-}
+};
 
-// const mapStateToProps = state => ({
-//   data: state.itemReducer.data,
-//   fetching: state.itemReducer.fetching,
-//   error: state.itemReducer.error
-// });
-// export default connect(
-//   mapStateToProps,
-//   { addLendItems }
-// )(Dashboard);
-export default Dashboard;
+const mapStateToProps = state => {
+  return {
+    userItems: state.userItems,
+    username: state.username
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchUser: fetchUser }
+)(Dashboard);

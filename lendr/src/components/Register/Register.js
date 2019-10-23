@@ -15,7 +15,7 @@ const Register = props => {
       if (!err) {
         props.addUser(values);
         props.form.setFieldsValue({ username: "", password: "" });
-        props.history.push(`/secret/${values.username}`);
+        props.history.push(`/login/${values.username}`);
       }
     });
   };
