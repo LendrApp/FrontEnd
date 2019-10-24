@@ -16,11 +16,11 @@ import {
   FETCH_SUCCESS,
   FETCH_FAILURE,
   EDIT_START,
-  ITEM_DETAIL_START,
-  ITEM_DETAIL_SUCCESS,
   DELETE_ITEM_START,
   DELETE_ITEM_SUCCESS,
-  DELETE_ITEM_FAILURE
+  DELETE_ITEM_FAILURE,
+  EDIT_SUCCESS,
+  EDIT_FAILURE
 } from "../actions/index";
 
 // REGISTRATION
@@ -122,11 +122,15 @@ export const reducer = (state = initialState, action) => {
 
     // EDIT
     case EDIT_START:
-      return { ...state, fetching: true };
-    case ITEM_DETAIL_START:
-      return { ...state, fetching: true };
-    case ITEM_DETAIL_SUCCESS:
-      return { ...state, itemData: action.payload, fetching: false };
+      return {
+        ...state,
+        fetching: true,
+        fetching_message: "Sending to database..."
+      };
+    case EDIT_SUCCESS:
+      return { ...state, fetching: false, error: false, changed: true };
+    case EDIT_FAILURE:
+      return { ...state, error: action.payload };
 
     // DELETE
     case DELETE_ITEM_START:
@@ -189,5 +193,6 @@ const initialState = {
   // singleItem: localStorage.getItem("item"),
   // userItems: localStorage.getItem("user")
   singleItem: "",
-  userItems: localStorage.getItem("user")
+  userItems: localStorage.getItem("user"),
+  changed: false
 };
