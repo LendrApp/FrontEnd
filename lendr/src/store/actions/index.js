@@ -102,14 +102,16 @@ export const ADD_ITEM_SUCCESS = "ADD_ITEM_SUCCESS";
 export const ADD_ITEM_FAILURE = "ADD_ITEM_FAILURE";
 
 export const addLendItems = lendItems => dispatch => {
+  console.log(lendItems);
   dispatch({ type: ADDING_ITEM });
   axiosWithAuth()
-    .post(`/api/items${lendItems.id}`, lendItems)
+    .post(`/api/items`, lendItems)
     .then(res => {
       console.log(`ADD ITEMS`, res);
       dispatch({
         type: ADD_ITEM_SUCCESS,
-        payload: res.data
+        // payload: res.data
+        payload: lendItems
       });
     })
     .catch(res =>

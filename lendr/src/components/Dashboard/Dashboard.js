@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import LendItemsCard from "../LendItems/LendItemsCard";
 import { connect } from "react-redux";
 import { fetchUser } from "../../store/actions";
+import LendItemsContainer from "../LendItems/LendItemsContainer";
 
 import { Button } from "antd";
 import "./Dashboard.scss";
