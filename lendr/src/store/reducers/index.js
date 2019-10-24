@@ -128,7 +128,14 @@ export const reducer = (state = initialState, action) => {
         fetching_message: "Sending to database..."
       };
     case EDIT_SUCCESS:
-      return { ...state, fetching: false, error: false, changed: true };
+      // return { ...state, fetching: false, error: false, changed: true };
+      let newItems = state.itemData.map(item => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        } else {
+          return item;
+        }
+      });
     case EDIT_FAILURE:
       return { ...state, error: action.payload };
 

@@ -6,6 +6,7 @@ import { Button } from "antd";
 
 const EditItem = props => {
   console.log(props);
+
   let initialState = {
     name: "",
     price: "",
