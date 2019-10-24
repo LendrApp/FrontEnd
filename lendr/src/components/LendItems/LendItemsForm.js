@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addLendItems } from "../../store/actions";
+import { Link } from 'react-router-dom';
 
 // styles
 import { Button } from "antd";
@@ -34,6 +35,11 @@ const LendItemsForm = props => {
   return (
     <div className="form-container">
       <form id="clear-input">
+        <Link className="link" to="/dashboard">
+          <Button type="primary" className='dash-button'>
+            <span>Back to Dashboard</span>
+          </Button>
+        </Link>
         <input
           type="text"
           name="name"
@@ -63,7 +69,7 @@ const LendItemsForm = props => {
           onChange={e => handleChanges(e)}
         />
 
-        <Button type="primary" onClick={e => handleSubmit(e)}>
+        <Button type="primary" className='dash-button' onClick={e => handleSubmit(e)}>
           <span>Lend Item</span>
         </Button>
       </form>
