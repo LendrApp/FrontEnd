@@ -25,13 +25,13 @@ const LendItemsCard = props => {
           <div className="btnctnr">
             <button
               onClick={() => {
-                props.deleteItem(props.data.id);
+                props.deleteItem(props.items.id);
               }}
             >
               Delete
             </button>
             <Icon type="delete" key="delete" />,
-            <NavLink to={`/items/${props.data.id}/edit`}>
+            <NavLink to={`/items/${props.items.id}/editItems`}>
               <button>Edit</button>
             </NavLink>
             <Icon type="edit" key="edit" />
