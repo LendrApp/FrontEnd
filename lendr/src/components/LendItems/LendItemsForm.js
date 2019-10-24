@@ -27,7 +27,7 @@ const LendItemsForm = props => {
     console.log(lendItem);
     e.preventDefault();
     props.addLendItems(lendItem);
-    // props.history.push(`/items`);
+    // props.history.push(`/dashboard:id`);
     document.getElementById("clear-input").reset();
   };
 

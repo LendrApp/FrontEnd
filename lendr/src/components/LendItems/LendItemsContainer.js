@@ -9,27 +9,27 @@ const LendItemsContainer = props => {
   console.log(`THIS IS PROPS IN LENDITEMSCONTAINER`, props);
   useEffect(() => {
     props.fetchItem();
-  }, []);
+  }, [props]);
 
-  // if (props.users) {
+  // if (props.itemData) {
   //   return <h2>Loading Items...</h2>;
   // }
 
-  if (props.itemData < 1) {
-    return <h1>This is loading...</h1>;
-  } else {
-    return (
-      <>
-        <LendItemsForm />
-        <div className="main-cards-container">
-          {props.itemData.map((item, index) => {
-            return <LendItemsCard key={index} item={item} />;
-          })}
-          {/* <LendItemsCard key={props.index} item={props.item} /> */}
-        </div>
-      </>
-    );
-  }
+  // if (props.itemData < 1) {
+  //   return <h1>Your items are loading...</h1>;
+  // } else {
+  return (
+    <>
+      <LendItemsForm />
+      <div className="main-cards-container">
+        {/* {props.itemData.map((item, index) => {
+          return <LendItemsCard key={index} item={item} />;
+        })} */}
+        {/* <LendItemsCard key={props.index} item={props.item} /> */}
+      </div>
+    </>
+  );
+  // }
 };
 
 const mapStateToProps = state => {
