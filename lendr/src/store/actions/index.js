@@ -124,31 +124,33 @@ export const addLendItems = lendItems => dispatch => {
 
 //Edit Action
 export const EDIT_START = "EDIT_START";
+export const EDIT_SUCCESS = "EDIT_SUCESS";
+export const EDIT_FAILURE = "EDIT_FAILURE";
 
-export const updateItem = id => dispatch => {
+export const updateItem = updatedItem => dispatch => {
   dispatch({ type: EDIT_START });
   axiosWithAuth()
-    .put(`https://lenders-app.herokuapp.com/api/items/:id`)
+    .put(`/api/items/:id`, updatedItem)
     .then(res => {
-      dispatch({ type: FETCH_SUCCESS, payload: res.data });
+      dispatch({ type: EDIT_SUCCESS, payload: updatedItem });
     })
     .catch(err => {
-      dispatch({ type: FETCH_FAILURE, payload: err.response });
+      dispatch({ type: EDIT_FAILURE, payload: err.response.data.code });
     });
 };
 
-export const ITEM_DETAIL_START = "ITEM_DETAIL_START";
-export const ITEM_DETAIL_SUCCESS = "ITEM_DETAIL_SUCCESS";
+// export const ITEM_DETAIL_START = "ITEM_DETAIL_START";
+// export const ITEM_DETAIL_SUCCESS = "ITEM_DETAIL_SUCCESS";
 
-export const itemDetail = id => dispatch => {
-  dispatch({ type: ITEM_DETAIL_START });
-  axiosWithAuth()
-    .get(`https://lenders-app.herokuapp.com/api/items/:id`)
-    .then(res => {
-      // console.log(res)
-      dispatch({ type: ITEM_DETAIL_SUCCESS, payload: res.data });
-    });
-};
+// export const itemDetail = id => dispatch => {
+//   dispatch({ type: ITEM_DETAIL_START });
+//   axiosWithAuth()
+//     .get(`https://lenders-app.herokuapp.com/api/items/:id`)
+//     .then(res => {
+//       // console.log(res)
+//       dispatch({ type: ITEM_DETAIL_SUCCESS, payload: res.data });
+//     });
+// };
 
 //Delete Action
 export const DELETE_ITEM_START = "DELETE_ITEM_START";
