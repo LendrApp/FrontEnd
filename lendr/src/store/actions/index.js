@@ -128,9 +128,15 @@ export const EDIT_SUCCESS = "EDIT_SUCESS";
 export const EDIT_FAILURE = "EDIT_FAILURE";
 
 export const updateItem = updatedItem => dispatch => {
+  let newItem = {
+    name: updateItem.name,
+    price: updateItem.price,
+    description: updateItem.description
+  };
+
   dispatch({ type: EDIT_START });
   axiosWithAuth()
-    .put(`/api/items/:id`, updatedItem)
+    .put(`/api/items/:id`, newItem)
     .then(res => {
       dispatch({ type: EDIT_SUCCESS, payload: updatedItem });
     })

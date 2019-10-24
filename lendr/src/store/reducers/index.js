@@ -136,6 +136,13 @@ export const reducer = (state = initialState, action) => {
           return item;
         }
       });
+      let newItemsUpdate = {
+        ...state.itemData,
+        fetching: false,
+        itemData: newItems
+      };
+      localStorage.setItem("user", JSON.stringify(newItemsUpdate));
+
     case EDIT_FAILURE:
       return { ...state, error: action.payload };
 
