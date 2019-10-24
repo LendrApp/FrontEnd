@@ -9,7 +9,7 @@ const LendItemsContainer = props => {
   console.log(`THIS IS PROPS IN LENDITEMSCONTAINER`, props);
   useEffect(() => {
     props.fetchItem();
-  }, [props]);
+  }, []);
 
   // if (props.itemData) {
   //   return <h2>Loading Items...</h2>;
