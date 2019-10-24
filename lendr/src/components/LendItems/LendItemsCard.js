@@ -23,7 +23,7 @@ const LendItemsCard = props => {
           <div className="btnctnr">
             {/* <button
               onClick={() => {
-                props.deleteItem(props.data.id);
+                props.deleteItem(props.item.id);
               }}
             >
               Delete
