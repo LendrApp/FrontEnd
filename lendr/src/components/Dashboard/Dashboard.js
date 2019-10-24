@@ -5,7 +5,8 @@
 import React, { useEffect } from "react";
 import LendItemsCard from "../LendItems/LendItemsCard";
 import { connect } from "react-redux";
-import { fetchUser } from "../../store/actions";
+import { fetchUser, fetchItem } from "../../store/actions";
+import LendItemsContainer from "../LendItems/LendItemsContainer";
 
 import { Button } from "antd";
 import "./Dashboard.scss";
@@ -15,8 +16,9 @@ const Dashboard = props => {
 
   useEffect(() => {
     props.fetchUser(props.username);
+    props.fetchItem();
     console.log(`props username`, props.username);
-  }, [props]);
+  }, []);
 
   const redirect = link => {
     props.history.push(link);
@@ -54,7 +56,9 @@ const Dashboard = props => {
             props.userItems.user.map(data => (
               <LendItemsCard key={data.id} data={data} />
             ))} */}
-              <LendItemsCard />
+              {props.itemData.map((item, index) => {
+                return <LendItemsCard key={index} item={item} />;
+              })}
             </div>
           </div>
           <div className="borrowed-items">
@@ -64,7 +68,6 @@ const Dashboard = props => {
             props.userItems.user.map(data => (
               <LendItemsCard key={data.id} data={data} />
             ))} */}
-              <LendItemsCard />
             </div>
           </div>
         </div>
@@ -75,12 +78,15 @@ const Dashboard = props => {
 
 const mapStateToProps = state => {
   return {
-    // userItems: state.userItems,
-    // username: state.username
+    userItems: state.userItems,
+    username: state.username,
+    itemData: state.itemData,
+    fetchingData: state.fetchingData,
+    error: state.error
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchUser: fetchUser }
+  { fetchUser: fetchUser, fetchItem: fetchItem }
 )(Dashboard);

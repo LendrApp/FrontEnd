@@ -17,19 +17,18 @@ const LendItemsForm = props => {
     description: ""
   });
 
+  console.log(lendItem);
+
   const handleChanges = e => {
     setLendItem({ ...lendItem, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
+    console.log(lendItem);
     e.preventDefault();
-    // props.addLendItem(lendItem);
-    // document.getElementById("clear-input").reset();
-    // if (id) {
-    //   props.addLendItems(lendItem);
-    // }
-    // props.history.push("./dashboard");
     props.addLendItems(lendItem);
+    // props.history.push(`/dashboard:id`);
+    document.getElementById("clear-input").reset();
   };
 
   return (
@@ -64,8 +63,8 @@ const LendItemsForm = props => {
           onChange={e => handleChanges(e)}
         />
 
-        <Button type="primary" onClick={handleSubmit}>
-          Lend Item
+        <Button type="primary" onClick={e => handleSubmit(e)}>
+          <span>Lend Item</span>
         </Button>
       </form>
     </div>
@@ -73,13 +72,13 @@ const LendItemsForm = props => {
 };
 
 const mapStateToProps = state => {
+  console.log(`THIS IS MSTP FORM`, state);
   return {
-    userItems: state.userItems,
-    username: state.username
+    state: state
   };
 };
 
 export default connect(
   mapStateToProps,
-  { addLendItems: addLendItems }
+  { addLendItems }
 )(LendItemsForm);
