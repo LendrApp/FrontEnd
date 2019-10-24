@@ -90,10 +90,10 @@ export const reducer = (state = initialState, action) => {
     case ADD_ITEM_SUCCESS:
       return {
         ...state,
-        itemData: action.payload,
         fetchingData: false,
-        addItem: true,
-        error: ""
+        error: "",
+        // itemData: action.payload
+        itemData: [...state.itemData, action.payload]
       };
     case ADD_ITEM_FAILURE:
       return {

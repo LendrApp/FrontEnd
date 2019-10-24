@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./LendItems.scss";
 import { Card, Icon } from "antd";
 import { NavLink } from "react-router-dom";
@@ -7,7 +7,8 @@ import { updateItem, deleteItem } from "../../store/actions";
 const { Meta } = Card;
 
 const LendItemsCard = props => {
-  console.log(`LENDITEMSCARD PROPS`, props);
+  console.log(`THIS IS LENDITEMSCARD PROPS`, props);
+
   return (
     <div className="item-card-container">
       {/* <p>Item: </p>
@@ -31,9 +32,9 @@ const LendItemsCard = props => {
               Delete
             </button>
             <Icon type="delete" key="delete" />,
-            <NavLink to={`/items/${props.data.id}/edit`}>
+            {/* <NavLink to={`/items/${props.data.id}/edit`}>
               <button>Edit</button>
-            </NavLink>
+            </NavLink> */}
             <Icon type="edit" key="edit" />
           </div>
           // <Icon type="ellipsis" key="ellipsis" />
@@ -43,10 +44,10 @@ const LendItemsCard = props => {
           // avatar={
           //   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           // }
-          title="`${props.items.name}`"
-          description="`${props.items.description}`"
+          title={props.item.name}
+          description={props.item.description}
         />
-        <h5> {props.items}/DAY</h5>
+        <h5> {props.item.price}/DAY</h5>
       </Card>
     </div>
   );

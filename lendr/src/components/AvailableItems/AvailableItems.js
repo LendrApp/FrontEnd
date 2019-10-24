@@ -28,7 +28,7 @@ const AvailableItems = () => {
         actions={[
           <Button type="primary">Borrow Item</Button>
 
-          // <Icon type="ellipsis" key="ellipsis" />
+          // <Icon type="ellipsis" key="elligitpsis" />
         ]}
       >
         <Meta
