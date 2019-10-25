@@ -29,7 +29,7 @@ const LendItemsCard = props => {
               Delete
             </button> */}
             <Icon type="delete" key="delete" />
-            <Link to="/edit-items">
+            <Link to={`/dashboard/:id/edit-items`}>
               <Icon type="edit" key="edit" />
             </Link>
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addLendItems } from "../../store/actions";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 // styles
 import { Button } from "antd";
@@ -28,7 +28,7 @@ const LendItemsForm = props => {
     console.log(lendItem);
     e.preventDefault();
     props.addLendItems(lendItem);
-    // props.history.push(`/dashboard:id`);
+    // props.history.push(`/dashboard`);
     document.getElementById("clear-input").reset();
   };
 
@@ -36,7 +36,7 @@ const LendItemsForm = props => {
     <div className="form-container">
       <form id="clear-input">
         <Link className="link" to="/dashboard">
-          <Button type="primary" className='dash-button'>
+          <Button type="primary" className="dash-button">
             <span>Back to Dashboard</span>
           </Button>
         </Link>
@@ -69,7 +69,11 @@ const LendItemsForm = props => {
           onChange={e => handleChanges(e)}
         />
 
-        <Button type="primary" className='dash-button' onClick={e => handleSubmit(e)}>
+        <Button
+          type="primary"
+          className="dash-button"
+          onClick={e => handleSubmit(e)}
+        >
           <span>Lend Item</span>
         </Button>
       </form>

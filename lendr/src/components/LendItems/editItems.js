@@ -22,43 +22,10 @@ const EditItem = props => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // let index = itemData.id;
-    // if(index !== )
-    let editItem = props.itemData.filter(item => item.id !== props.itemData.id);
-    updateItem([...editItem]);
-    console.log(editItem);
+    const id = props.match.params.id;
+    props.updateItem(editing, id);
+    console.log(id);
   };
-
-  // console.log(itemData);
-
-  // const editingState = {
-  //   name: "",
-  //   description: "",
-  //   price: ""
-  // };
-
-  // const [stuff, setStuff] = useState(editingState);
-
-  // const handleChange = e => {
-  //   setStuff({ ...stuff, [e.target.name]: e.target.value });
-  // };
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   axiosWitAuth()
-  //     .put(`https://lenders-app.herokuapp.com/api/items/:id`, stuff)
-  //     .then(res => {
-  //       setStuff(editingState);
-  //       props.history.push(`/AvailableItems`);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
-  // console.log(stuff);
-
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   props.updateItem();
-  // };
 
   return (
     <div className="form-container">
@@ -96,7 +63,8 @@ const EditItem = props => {
 const mapStateToProps = state => {
   return {
     itemData: state.itemData,
-    username: state.username
+    username: state.username,
+    changed: state.changed
   };
 };
 export default connect(

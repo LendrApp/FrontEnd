@@ -23,7 +23,11 @@ function App() {
       <PrivateRoute exact path="/secret" component={ExampleComponent} />
       <PrivateRoute exact path="/dashboard" component={Dashboard} />
       <PrivateRoute exact path="/items" component={LendItemsContainer} />
-      <PrivateRoute exact path="/edit-items" component={EditItems} />
+      <PrivateRoute
+        exact
+        path="/dashboard/:id/edit-items"
+        component={EditItems}
+      />
       <PrivateRoute exact path="/available-items" component={AvailableItems} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
