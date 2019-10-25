@@ -27,13 +27,12 @@ const LendItemsCard = props => {
         }
         actions={[
           <div className="btnctnr">
-            {/* <button
+            <button
               onClick={() => {
                 props.deleteItem(props.item.id);
               }}
             >
               Delete
-            </button> */}
             <Icon type="delete" key="delete" onClick={e => handleDelete(e)} />
             <Link to={`/dashboard/edit-items/${props.item.id}`}>
               <Icon type="edit" key="edit" />
