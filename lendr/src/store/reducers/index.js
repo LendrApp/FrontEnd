@@ -26,7 +26,6 @@ import {
 // REGISTRATION
 
 export const reducer = (state = initialState, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case REGISTRATION_START:
       return {
@@ -122,20 +121,33 @@ export const reducer = (state = initialState, action) => {
 
     // EDIT
     case EDIT_START:
+      console.log("HI");
       return {
         ...state,
         fetching: true,
         fetching_message: "Sending to database..."
       };
     case EDIT_SUCCESS:
-      // return { ...state, fetching: false, error: false, changed: true };
-      let newItems = state.itemData.map(item => {
-        if (item.id === action.payload.id) {
-          return action.payload;
-        } else {
-          return item;
-        }
-      });
+      return {
+        ...state,
+        fetching: false,
+        error: false,
+        itemData: [...state.itemData, action.payload]
+      };
+    // let newItems = state.itemData.map(item => {
+    //   if (item.id === action.payload.id) {
+    //     return action.payload;
+    //   } else {
+    //     return item;
+    //   }
+    // });
+    // let newItemsUpdate = {
+    //   ...state.itemData,
+    //   fetching: false,
+    //   itemData: newItems
+    // };
+    // localStorage.setItem("user", JSON.stringify(newItemsUpdate));
+
     case EDIT_FAILURE:
       return { ...state, error: action.payload };
 
@@ -143,11 +155,15 @@ export const reducer = (state = initialState, action) => {
     case DELETE_ITEM_START:
       return { ...state, deletingItem: true };
     case DELETE_ITEM_SUCCESS:
+      let filteredItems = state.itemData.filter(
+        item => item.id != state.itemData.id
+      );
+      // let filteredItemsData = { ...state.itemData, items: filteredItems };
       return {
         ...state,
-        deletingItem: false,
-        error: "",
-        message: action.payload
+        fetching: false,
+        itemData: [...filteredItems, action.payload],
+        error: ""
       };
     case DELETE_ITEM_FAILURE:
       return { ...state, error: action.payload, fetching: false };

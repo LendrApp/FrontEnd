@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import LendItemsForm from "./LendItemsForm";
-import LendItemsCard from "./LendItemsCard";
 import { fetchItem } from "../../store/actions";
 import "./LendItems.scss";
 

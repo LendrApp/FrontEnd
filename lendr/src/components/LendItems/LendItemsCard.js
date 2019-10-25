@@ -2,12 +2,18 @@ import React from "react";
 import "./LendItems.scss";
 import { Card, Icon } from "antd";
 import { NavLink, Link } from "react-router-dom";
-import { updateItem, deleteItem } from "../../store/actions";
+import { deleteItem } from "../../store/actions";
+import { connect } from "react-redux";
 
 const { Meta } = Card;
 
 const LendItemsCard = props => {
   console.log(`THIS IS LENDITEMSCARD PROPS`, props);
+
+  const handleDelete = () => {
+    const id = props.item.id;
+    props.deleteItem(id);
+  };
 
   return (
     <div className="item-card-container">
@@ -27,9 +33,8 @@ const LendItemsCard = props => {
               }}
             >
               Delete
-            </button>
-            <Icon type="delete" key="delete" />
-            <Link to="/edit-items">
+            <Icon type="delete" key="delete" onClick={e => handleDelete(e)} />
+            <Link to={`/dashboard/edit-items/${props.item.id}`}>
               <Icon type="edit" key="edit" />
             </Link>
           </div>
@@ -49,4 +54,16 @@ const LendItemsCard = props => {
   );
 };
 
-export default LendItemsCard;
+const mapStateToProps = state => {
+  return {
+    itemData: state.itemData,
+    error: state.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { deleteItem }
+)(LendItemsCard);
+
+// export default LendItemsCard;

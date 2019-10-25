@@ -124,18 +124,24 @@ export const addLendItems = lendItems => dispatch => {
 
 //Edit Action
 export const EDIT_START = "EDIT_START";
-export const EDIT_SUCCESS = "EDIT_SUCESS";
+export const EDIT_SUCCESS = "EDIT_SUCCESS";
 export const EDIT_FAILURE = "EDIT_FAILURE";
 
-export const updateItem = updatedItem => dispatch => {
+export const updateItem = (updatedItem, id) => dispatch => {
+  // let newItem = {
+  //   name: updateItem.name,
+  //   price: updateItem.price,
+  //   description: updateItem.description
+  // };
   dispatch({ type: EDIT_START });
   axiosWithAuth()
-    .put(`/api/items/:id`, updatedItem)
+    .put(`https://lenders-app.herokuapp.com/api/items/${id}`, updatedItem)
     .then(res => {
       dispatch({ type: EDIT_SUCCESS, payload: updatedItem });
     })
     .catch(err => {
       dispatch({ type: EDIT_FAILURE, payload: err.response.data.code });
+      console.log(err.message);
     });
 };
 
@@ -160,10 +166,10 @@ export const DELETE_ITEM_FAILURE = "DELETE_ITEM_FAILURE";
 export const deleteItem = id => dispatch => {
   dispatch({ type: DELETE_ITEM_START });
   axiosWithAuth()
-    .delete(`https://lenders-app.herokuapp.com/api/items/:id`)
+    .delete(`https://lenders-app.herokuapp.com/api/items/${id}`)
     .then(res => {
       console.log(res.data.message);
-      dispatch({ type: DELETE_ITEM_SUCCESS, payload: res.data });
+      dispatch({ type: DELETE_ITEM_SUCCESS, payload: id });
     })
     .catch(err => {
       console.log(err);
