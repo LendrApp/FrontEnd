@@ -155,14 +155,18 @@ export const reducer = (state = initialState, action) => {
     case DELETE_ITEM_START:
       return { ...state, deletingItem: true };
     case DELETE_ITEM_SUCCESS:
-      let filteredItems = state.itemData.filter(
-        item => item.id != state.itemData.id
-      );
+      // let filteredItems = state.itemData.filter(
+      //   item => item.id != state.itemData.id
+      // );
       // let filteredItemsData = { ...state.itemData, items: filteredItems };
       return {
         ...state,
         fetching: false,
-        itemData: [...filteredItems, action.payload],
+        itemData: [
+          ...state.itemData.filter(item => {
+            return item.id != action.payload;
+          })
+        ],
         error: ""
       };
     case DELETE_ITEM_FAILURE:

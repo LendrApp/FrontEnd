@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LendItems.scss";
 import { Card, Icon } from "antd";
 import { NavLink, Link } from "react-router-dom";
@@ -10,7 +10,8 @@ const { Meta } = Card;
 const LendItemsCard = props => {
   console.log(`THIS IS LENDITEMSCARD PROPS`, props);
 
-  const handleDelete = () => {
+  const handleDelete = e => {
+    e.preventDefault();
     const id = props.item.id;
     props.deleteItem(id);
   };
@@ -34,7 +35,7 @@ const LendItemsCard = props => {
             >
               Delete
             </button> */}
-            <Icon type="delete" key="delete" onClick={e => handleDelete(e)} />
+            <Icon type="delete" key="delete" onClick={handleDelete} />
             <Link to={`/dashboard/edit-items/${props.item.id}`}>
               <Icon type="edit" key="edit" />
             </Link>
