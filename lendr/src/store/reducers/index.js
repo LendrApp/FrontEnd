@@ -132,7 +132,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         fetching: false,
         error: false,
-        itemData: action.payload
+        itemData: [...state.itemData, action.payload]
       };
     // let newItems = state.itemData.map(item => {
     //   if (item.id === action.payload.id) {
@@ -155,11 +155,15 @@ export const reducer = (state = initialState, action) => {
     case DELETE_ITEM_START:
       return { ...state, deletingItem: true };
     case DELETE_ITEM_SUCCESS:
+      let filteredItems = state.itemData.filter(
+        item => item.id != state.itemData.id
+      );
+      // let filteredItemsData = { ...state.itemData, items: filteredItems };
       return {
         ...state,
-        deletingItem: false,
-        error: "",
-        message: action.payload
+        fetching: false,
+        itemData: [...filteredItems, action.payload],
+        error: ""
       };
     case DELETE_ITEM_FAILURE:
       return { ...state, error: action.payload, fetching: false };

@@ -23,6 +23,7 @@ const EditItem = props => {
   const saveEdit = e => {
     e.preventDefault();
     const id = props.match.params.id;
+    // const id = props.itemData.id;
     props.updateItem(editing, id);
     console.log(id);
   };
