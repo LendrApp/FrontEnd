@@ -25,6 +25,7 @@ const EditItem = props => {
     const id = props.match.params.id;
     // const id = props.itemData.id;
     props.updateItem(editing, id);
+    props.history.push(`/dashboard`);
     console.log(id);
   };
 

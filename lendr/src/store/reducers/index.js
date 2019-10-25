@@ -20,7 +20,10 @@ import {
   DELETE_ITEM_SUCCESS,
   DELETE_ITEM_FAILURE,
   EDIT_SUCCESS,
-  EDIT_FAILURE
+  EDIT_FAILURE,
+  BORROW_START,
+  BORROW_ITEM_SUCCESS,
+  BORROW_ERROR
 } from "../actions/index";
 
 // REGISTRATION
@@ -134,19 +137,6 @@ export const reducer = (state = initialState, action) => {
         error: false,
         itemData: [...state.itemData, action.payload]
       };
-    // let newItems = state.itemData.map(item => {
-    //   if (item.id === action.payload.id) {
-    //     return action.payload;
-    //   } else {
-    //     return item;
-    //   }
-    // });
-    // let newItemsUpdate = {
-    //   ...state.itemData,
-    //   fetching: false,
-    //   itemData: newItems
-    // };
-    // localStorage.setItem("user", JSON.stringify(newItemsUpdate));
 
     case EDIT_FAILURE:
       return { ...state, error: action.payload };
@@ -155,14 +145,14 @@ export const reducer = (state = initialState, action) => {
     case DELETE_ITEM_START:
       return { ...state, deletingItem: true };
     case DELETE_ITEM_SUCCESS:
-      let filteredItems = state.itemData.filter(
-        item => item.id != state.itemData.id
-      );
-      // let filteredItemsData = { ...state.itemData, items: filteredItems };
       return {
         ...state,
         fetching: false,
-        itemData: [...filteredItems, action.payload],
+        itemData: [
+          ...state.itemData.filter(item => {
+            return item.id != action.payload;
+          })
+        ],
         error: ""
       };
     case DELETE_ITEM_FAILURE:
@@ -193,6 +183,26 @@ export const reducer = (state = initialState, action) => {
         error: true
       };
 
+    // Borrowing Item
+    case BORROW_START:
+      return {
+        ...state,
+        addItem: true
+      };
+    case BORROW_ITEM_SUCCESS:
+      return {
+        ...state,
+        addItem: false,
+        error: "",
+        borrowData: [...state.borrowData, action.payload]
+      };
+    case BORROW_ERROR:
+      return {
+        ...state,
+        addItem: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }
@@ -210,6 +220,7 @@ const initialState = {
   password: "",
   email: "",
   itemData: [],
+  borrowData: [],
   addItem: false,
   data: [],
   token: localStorage.getItem("token"),

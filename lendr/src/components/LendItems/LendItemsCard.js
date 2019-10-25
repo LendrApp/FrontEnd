@@ -1,16 +1,17 @@
 import React from "react";
 import "./LendItems.scss";
 import { Card, Icon } from "antd";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deleteItem } from "../../store/actions";
 import { connect } from "react-redux";
 
 const { Meta } = Card;
 
 const LendItemsCard = props => {
-  console.log(`THIS IS LENDITEMSCARD PROPS`, props);
+  // console.log(`THIS IS LENDITEMSCARD PROPS`, props);
 
-  const handleDelete = () => {
+  const handleDelete = e => {
+    e.preventDefault();
     const id = props.item.id;
     props.deleteItem(id);
   };
@@ -22,34 +23,26 @@ const LendItemsCard = props => {
         cover={
           <img
             alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+            src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
           />
         }
         actions={[
-          <div className="btnctnr">
-            {/* <button
-              onClick={() => {
-                props.deleteItem(props.item.id);
-              }}
-            >
-              Delete
-            </button> */}
-            <Icon type="delete" key="delete" onClick={e => handleDelete(e)} />
-            <Link to={`/dashboard/edit-items/${props.item.id}`}>
-              <Icon type="edit" key="edit" />
-            </Link>
-          </div>
-          // <Icon type="ellipsis" key="ellipsis" />
+          <Icon
+            className="icon-delete"
+            type="delete"
+            key="delete"
+            onClick={handleDelete}
+          />,
+          <Link
+            className="icon-edit"
+            to={`/dashboard/edit-items/${props.item.id}`}
+          >
+            <Icon type="edit" key="edit" />
+          </Link>
         ]}
       >
-        <Meta
-          // avatar={
-          //   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          // }
-          title={props.item.name}
-          description={props.item.description}
-        />
-        <h5> {props.item.price}/DAY</h5>
+        <Meta title={props.item.name} description={props.item.description} />
+        <h5> ${props.item.price}/DAY</h5>
       </Card>
     </div>
   );
