@@ -22,9 +22,9 @@ const EditItem = props => {
 
   const saveEdit = e => {
     e.preventDefault();
-    let editItem = props.itemData.filter(item => item.id !== props.itemData.id);
-    updateItem([...editItem]);
-    console.log(editItem);
+    const id = props.match.params.id;
+    props.updateItem(editing, id);
+    console.log(id);
   };
 
   return (
