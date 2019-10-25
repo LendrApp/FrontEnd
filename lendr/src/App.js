@@ -8,7 +8,7 @@ import ExampleComponent from "./components/ExampleComponent/ExampleComponent";
 import LendItemsContainer from "./components/LendItems/LendItemsContainer";
 import AvailableItems from "./components/AvailableItems/AvailableItems";
 import Dashboard from "./components/Dashboard/Dashboard";
-import EditItems from "./components/LendItems/EditItems";
+import EditItemsCard from "./components/LendItems/EditItemsCard";
 
 import { Route } from "react-router-dom";
 import PrivateRoute from "./utils/authRouter";
@@ -26,7 +26,7 @@ function App() {
       <PrivateRoute
         exact
         path={`/dashboard/edit-items/:id`}
-        component={EditItems}
+        component={EditItemsCard}
       />
       <PrivateRoute exact path="/available-items" component={AvailableItems} />
       <Route exact path="/login" component={Login} />
