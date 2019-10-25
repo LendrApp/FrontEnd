@@ -41,7 +41,6 @@ export const logInUser = user => dispatch => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data.token,
-        //  && res.data.user
         user: res.data.user
       });
     })
@@ -128,11 +127,6 @@ export const EDIT_SUCCESS = "EDIT_SUCCESS";
 export const EDIT_FAILURE = "EDIT_FAILURE";
 
 export const updateItem = (updatedItem, id) => dispatch => {
-  // let newItem = {
-  //   name: updateItem.name,
-  //   price: updateItem.price,
-  //   description: updateItem.description
-  // };
   dispatch({ type: EDIT_START });
   axiosWithAuth()
     .put(`https://lenders-app.herokuapp.com/api/items/${id}`, updatedItem)
@@ -144,19 +138,6 @@ export const updateItem = (updatedItem, id) => dispatch => {
       console.log(err.message);
     });
 };
-
-// export const ITEM_DETAIL_START = "ITEM_DETAIL_START";
-// export const ITEM_DETAIL_SUCCESS = "ITEM_DETAIL_SUCCESS";
-
-// export const itemDetail = id => dispatch => {
-//   dispatch({ type: ITEM_DETAIL_START });
-//   axiosWithAuth()
-//     .get(`https://lenders-app.herokuapp.com/api/items/:id`)
-//     .then(res => {
-//       // console.log(res)
-//       dispatch({ type: ITEM_DETAIL_SUCCESS, payload: res.data });
-//     });
-// };
 
 //Delete Action
 export const DELETE_ITEM_START = "DELETE_ITEM_START";
@@ -174,5 +155,24 @@ export const deleteItem = id => dispatch => {
     .catch(err => {
       console.log(err);
       dispatch({ type: DELETE_ITEM_FAILURE, payload: err });
+    });
+};
+
+// Borrowing Action
+export const BORROW_START = "BORROW_START";
+export const BORROW_ITEM_SUCCESS = "BORROW_ITEM_SUCCESS";
+export const BORROW_ERROR = "BORROW_ERROR";
+
+export const borrowItem = borrowItem => dispatch => {
+  dispatch({ type: BORROW_START });
+  axiosWithAuth()
+    .get(`/api/items`, borrowItem)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: BORROW_ITEM_SUCCESS, payload: borrowItem });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: BORROW_ERROR, payload: err });
     });
 };

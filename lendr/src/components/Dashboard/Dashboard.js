@@ -5,8 +5,8 @@
 import React, { useEffect } from "react";
 import LendItemsCard from "../LendItems/LendItemsCard";
 import { connect } from "react-redux";
-import { fetchUser, fetchItem } from "../../store/actions";
-import LendItemsContainer from "../LendItems/LendItemsContainer";
+import { fetchUser, fetchItem, borrowItem } from "../../store/actions";
+import BorrowedItem from "../AvailableItems/BorrowedItem";
 
 import { Button } from "antd";
 import "./Dashboard.scss";
@@ -52,10 +52,6 @@ const Dashboard = props => {
           <div className="lend-items">
             <h2 className="h2">My Items</h2>
             <div className="items-container">
-              {/* {props.userItems &&
-            props.userItems.user.map(data => (
-              <LendItemsCard key={data.id} data={data} />
-            ))} */}
               {props.itemData.map((item, index) => {
                 return <LendItemsCard key={index} item={item} />;
               })}
@@ -64,10 +60,9 @@ const Dashboard = props => {
           <div className="borrowed-items">
             <h2 className="h2">Borrowed Items</h2>
             <div className="items-container">
-              {/* {props.userItems &&
-            props.userItems.user.map(data => (
-              <LendItemsCard key={data.id} data={data} />
-            ))} */}
+              {props.borrowData.map((item, index) => {
+                return <BorrowedItem key={index} item={item} />;
+              })}
             </div>
           </div>
         </div>
@@ -78,15 +73,12 @@ const Dashboard = props => {
 
 const mapStateToProps = state => {
   return {
-    userItems: state.userItems,
-    username: state.username,
     itemData: state.itemData,
-    fetchingData: state.fetchingData,
-    error: state.error
+    borrowData: state.borrowData
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchUser: fetchUser, fetchItem: fetchItem }
+  { fetchUser: fetchUser, fetchItem: fetchItem, borrowItem: borrowItem }
 )(Dashboard);
