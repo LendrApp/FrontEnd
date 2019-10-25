@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Button, Input } from "antd";
 import { connect } from "react-redux";
 import { fetchUser, fetchItem } from "../../store/actions";
@@ -6,10 +6,26 @@ import LendItemsCard from "../LendItems/LendItemsCard";
 import AvailableItemsCard from "./AvailableItemsCard";
 import "./AvailableItems.scss";
 
-const { Meta } = Card;
 const { Search } = Input;
 
 const AvailableItems = props => {
+  const [search, setSearch] = useState({
+    search: "",
+    selectItem: ""
+  });
+
+  const handleChange = e => {
+    setSearch({ ...search, [e.target.name]: e.target.value });
+    console.log(e);
+  };
+
+  const handleSubmit = e => {
+    // e.preventDefault();
+    props.itemData.filter(item => {
+      return item.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
+  };
+
   return (
     <div>
       <h2>Borrow an Item!</h2>
@@ -18,32 +34,10 @@ const AvailableItems = props => {
           placeholder="Search an item"
           enterButton="Search"
           size="large"
+          onChange={handleChange}
           onSearch={value => console.log(value)}
         />
       </div>
-      {/* <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[
-          <Button type="primary">Borrow Item</Button>
-
-          // <Icon type="ellipsis" key="elligitpsis" />
-        ]}
-      >
-        <Meta
-          // avatar={
-          //   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          // }
-          title="Item"
-          description="This is the description"
-        />
-        <h5> $400/DAY</h5>
-      </Card> */}
       <div className="all-cards-container">
         {props.itemData.map((item, index) => {
           return <AvailableItemsCard key={index} item={item} />;
