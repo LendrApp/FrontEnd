@@ -25,7 +25,7 @@ function App() {
       <PrivateRoute exact path="/items" component={LendItemsContainer} />
       <PrivateRoute
         exact
-        path="/dashboard/:id/edit-items"
+        path={`/dashboard/edit-items/:id`}
         component={EditItems}
       />
       <PrivateRoute exact path="/available-items" component={AvailableItems} />

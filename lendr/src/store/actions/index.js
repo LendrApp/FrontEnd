@@ -166,10 +166,10 @@ export const DELETE_ITEM_FAILURE = "DELETE_ITEM_FAILURE";
 export const deleteItem = id => dispatch => {
   dispatch({ type: DELETE_ITEM_START });
   axiosWithAuth()
-    .delete(`https://lenders-app.herokuapp.com/api/items/:id`)
+    .delete(`https://lenders-app.herokuapp.com/api/items/${id}`)
     .then(res => {
       console.log(res.data.message);
-      dispatch({ type: DELETE_ITEM_SUCCESS, payload: res.data });
+      dispatch({ type: DELETE_ITEM_SUCCESS, payload: id });
     })
     .catch(err => {
       console.log(err);
